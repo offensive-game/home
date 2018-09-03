@@ -3,6 +3,9 @@
 1. Clone this repo
 2. Add executing permissions to `clone-repos.sh` script
 3. Execute `clone-repos.sh` script. It will clone each repository under apps folder
+4. Add `127.0.0.1   offensive.local` to hosts file (`/etc/hosts`)
+5. In the directory where `docker-compose.yml` file is stored open terminal and run `docker-compose up`
+6. Open browser and go to `http://offensive.local`
 
 ## Add new application
 

@@ -1,16 +1,14 @@
 version: "3.1"
 
 services:
-  web-app:
+  web-client:
     build:
       context:
-        ./app/web-client
-    command: ["npm", "run", "dev" ]
+        ./apps/web-client
     ports:
-      - "9229:9229"
-      - "3000:3000"
+      - 80:4000
     volumes:
-      - ./app:/usr/src/app
+      - ./apps/web-client:/usr/src/app
     environment:
       - NODE_ENV=development
-      - VIRTUAL_HOST=app.local
+      - PORT=4000
