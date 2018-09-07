@@ -5,7 +5,9 @@
 3. Execute `clone-repos.sh` script. It will clone each repository under apps folder
 4. Add `127.0.0.1   offensive.local` to hosts file (`/etc/hosts`)
 5. In the directory where `docker-compose.yml` file is stored open terminal and run `docker-compose up`
-6. Open browser and go to `http://offensive.local`
+6. In the root folder there are development key and certificate. Make sure that you make that certificate trusted in OS
+7. When running docker it might have problem with binding to port 443 since it's default HTTPS port. On Linux you just need to run docker with root permissions once.
+8. Open browser and go to `https://offensive.local`
 
 ## Add new application
 

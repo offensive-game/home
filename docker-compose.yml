@@ -6,9 +6,9 @@ services:
       context:
         ./apps/web-client
     ports:
-      - 80:4000
+      - 443:443
     volumes:
       - ./apps/web-client:/usr/src/app
     environment:
       - NODE_ENV=development
-      - PORT=4000
+      - PORT=443
