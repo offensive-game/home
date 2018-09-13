@@ -75,6 +75,16 @@ The client will issue `GET` request to `/game` endpoint with no body. This is pr
 ```
 Each of game objects (game1, game2, game3...) should be in the same format as create game response, described in upper chapter. For the first version I think that we don't need to implement paging for this request. NOTE: Client can occasionally can re-send this request in order to refresh list of currently active games.
 
+## Getting current user info
+The client can fetch information about himself on `GET /me` endpoint. Response body should have all fields related to current player:
+```
+{
+    "username": "username",
+    "player_id": "player_id",
+    ... for v2 we might have some additional fields related to player like number of games / number of wins / credits...
+}
+```
+
 ## Joining the game
 In order to join the game client will send `GET` request to `/game/gameId` endpoint. `gameId` param represents game identifier received in previous message. In the response server should return current status of the game (or appropriate HTTP status code if the user can't join the game). Example of message:
 ```
