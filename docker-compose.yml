@@ -5,10 +5,35 @@ services:
     build:
       context:
         ./apps/web-client
-    ports:
-      - 443:443
+    hostname: "ssr.offensive.local"
     volumes:
       - ./apps/web-client:/usr/src/app
     environment:
       - NODE_ENV=development
       - PORT=443
+    container_name: web-client
+
+  proxy:
+    build:
+      context:
+        ./apps/proxy
+    ports: 
+      - 443:443
+    volumes:
+      - ./apps/proxy/certs:/etc/nginx/certs/
+    container_name: proxy
+    depends_on:
+      - web-client
+      - demo-server
+
+  demo-server:
+    build:
+      context:
+        ./apps/demo-server
+    hostname: "demo.offensive.local"
+    volumes:
+      - ./apps/demo-server:/usr/src/app
+    container_name: demo-server
+    environment:
+      - NODE_ENV=development
+      - PORT=7070
