@@ -12,6 +12,7 @@ services:
       - NODE_ENV=development
       - PORT=443
     container_name: web-client
+    hostname: "ssr.offensive.local"
 
   proxy:
     build:
@@ -21,10 +22,10 @@ services:
       - 443:443
     volumes:
       - ./apps/proxy/certs:/etc/nginx/certs/
-    container_name: proxy
+    container_name: offensive.local
+    hostname: offensive.local
     depends_on:
       - web-client
-      - demo-server
 
   demo-server:
     build:
