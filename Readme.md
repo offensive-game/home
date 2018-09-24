@@ -40,7 +40,7 @@ After that user should be able to log in using the same credentials by hitting `
 In response server should return the same response (with appropriate status code) plus email address. Also, server should set cookie `offensive-login` with generated login token. Server will check that cookie on each subsequent message to determine if user is logged in
 
 ### Using Facebook
-TODO... Facebook is using OAuth. I'm not completely sure how the process of login is going. This is something that I should re-check :) 
+TODO... Facebook is using OAuth. I'm not completely sure how the process of login is going. This is something that I should re-check :)
 
 ## Creating a new game
 When creating a new game client will hit `/game` endpoint with `POST` request. Message body:
@@ -102,8 +102,8 @@ In order to join the game client will send `GET` request to `/game/gameId` endpo
     ]
 }
 ```
-`players` array is list of all players that are joined to game so far. 
-Immediately after receiving response for joining the game, client will open web-socket connection to server which will be used in cases when server wants to notify client about some change that was not triggered by current client. So after the current player is joined on each subsequential join of some other player to this game, server should send via web-socket to each client joined to game following message:
+`players` array is list of all players that are joined to game so far.
+Immediately after receiving response for joining the game, client will open web-socket connection to server (`serveraddress/ws?token=user_login_token`) which will be used in cases when server wants to notify client about some change that was not triggered by current client. So after the current player is joined on each subsequential join of some other player to this game, server should send via web-socket to each client joined to game following message:
 ```
 {
     "type": "OPPONENT_JOINED_SUCCESS",
@@ -243,7 +243,7 @@ In response server will respond with the same message plus one more field `dices
 
 If attacker does not hit that endpoint within 10 seconds it will be considered that he retreated and this battle will be terminated leaving the same state of board as before battle.
 If defender does not hit that endpoint within 10 seconds server will anyway throw dices for him.
-After dices are thrown either way server will send next `BATTLE_EXECUTION_SUCCESS` message with updated state. 
+After dices are thrown either way server will send next `BATTLE_EXECUTION_SUCCESS` message with updated state.
 
 Attacker can retreat at any point by hitting `/retreat` endpoint with the same message as on `roll` endpoint. Response is the same as request body.
 When one battle is finished server should send `BATTLE_DONE_SUCCESS` message having a new state on the board.
@@ -297,7 +297,3 @@ After some user is defeated (does not have any land under control) he will not b
 ```
 
 When there is only one player left after it sends the last `PLAYER_DEFETED_SUCESS` message client will show the winner message. Server can close all WS connections and do a clean-up. Game has ended.
-
-
-
-
