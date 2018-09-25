@@ -18,7 +18,7 @@ services:
     build:
       context:
         ./apps/proxy
-    ports: 
+    ports:
       - 443:443
     volumes:
       - ./apps/proxy/certs:/etc/nginx/certs/
@@ -26,6 +26,19 @@ services:
     hostname: offensive.local
     depends_on:
       - web-client
+
+  db:
+    build:
+      context:
+        ./apps/db
+    container_name: db
+    hostname: db.offensive.local
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=offensive
+      - POSTGRES_PASSWORD=testee
+      - POSTGRES_DB=offensive
 
   demo-server:
     build:
