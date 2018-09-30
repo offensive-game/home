@@ -26,6 +26,7 @@ services:
     hostname: offensive.local
     depends_on:
       - web-client
+      - go-server
 
   db:
     build:
@@ -57,5 +58,6 @@ services:
       - db
     environment:
       - PORT=7070
+      - DB_HOST=db
     entrypoint:
-      - ./scripts/debug.sh
+      - ./scripts/run.sh
