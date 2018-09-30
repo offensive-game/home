@@ -40,14 +40,22 @@ services:
       - POSTGRES_PASSWORD=testee
       - POSTGRES_DB=offensive
 
-  demo-server:
+  go-server:
     build:
       context:
-        ./apps/demo-server
-    hostname: "demo.offensive.local"
+        ./apps/go-server
+    hostname: "api.offensive.local"
     volumes:
-      - ./apps/demo-server:/usr/src/app
-    container_name: demo-server
+      - ./apps/go-server:/usr/src/app
+    container_name: api-server
+    ports:
+      - 7070:7070
+      - 2345:2345
+    security_opt:
+      - seccomp:unconfined
+    depends_on:
+      - db
     environment:
-      - NODE_ENV=development
       - PORT=7070
+    entrypoint:
+      - ./scripts/debug.sh

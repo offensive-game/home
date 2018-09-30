@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-appNames=("web-client" "demo-server" "proxy" "server" "db")
+appNames=("web-client" "demo-server" "proxy" "server" "db" "go-server")
 
 for appName in "${appNames[@]}"
 do
